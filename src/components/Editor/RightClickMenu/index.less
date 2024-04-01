@@ -1,0 +1,32 @@
+.rightClickMenu {
+  position: absolute;
+  z-index: 9999;
+
+  .menu {
+    position: absolute;
+    box-sizing: border-box;
+    display: none;
+    padding: 4px;
+    background-color: rgb(72, 72, 78);
+    border-radius: 8px;
+    outline: none;
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 30px;
+      padding: 0 15px;
+      cursor: pointer;
+      border-radius: 8px;
+
+      &:hover {
+        background-color: rgb(134, 134, 146);
+      }
+
+      .name {
+        color: white;
+        white-space: nowrap;
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+.wrapper {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 21px 24px 24px 24px;
+  background: #FFF;
+  border-radius: 12px;
+}

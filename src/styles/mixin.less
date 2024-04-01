@@ -1,0 +1,13 @@
+.f-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.f-ellipsis-num (@num) {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: @num;
+  -webkit-box-orient: vertical;
+}

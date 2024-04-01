@@ -1,0 +1,26 @@
+.scena-editor {
+  --configPanel: 200px;
+}
+
+.scena-config-panel {
+  position: absolute;
+  top: var(--header);
+  right: 0;
+  width: var(--configPanel);
+  height: calc(100% - var(--header));
+  background: var(--back2);
+  z-index: 10;
+  transform: translateZ(10px);
+  box-sizing: border-box;
+  padding-top: 30px;
+  transition: width ease 0.2s;
+  text-align: left;
+
+  &-title {
+    color: white;
+  }
+
+  &-attrs {
+    color: white;
+  }
+}

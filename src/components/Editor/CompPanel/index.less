@@ -1,0 +1,36 @@
+.scena-editor {
+  --compPanel: 180px;
+}
+
+.scena-comp-panel {
+  position: absolute;
+  top: var(--header);
+  width: var(--compPanel);
+  height: calc(100% - var(--header));
+  background: var(--back2);
+  box-sizing: border-box;
+  padding: 15px 7px 0px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &-list {
+    color: white;
+
+    &-item {
+      width: 100%;
+      text-align: center;
+      margin: 0 auto;
+      margin-bottom: 18px;
+      &-name {
+        margin-bottom: 8px;
+      }
+
+      &-img {
+        width: 120px;
+        height: 89px;
+      }
+    }
+  }
+}
