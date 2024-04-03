@@ -8,6 +8,7 @@ import KeyManager from './KeyManager/KeyManager';
 import Editor from './Editor';
 import HistoryManager from './utils/HistoryManager';
 import Debugger from './utils/Debugger';
+import { IDataV } from './Viewport/Viewport';
 
 export interface ScenaEditorState {
   selectedTargets: Array<SVGElement | HTMLElement>;
@@ -58,7 +59,7 @@ export interface SavedScenaData {
   innerText?: string;
   attrs: IObject<any>;
   frame: IObject<any>;
-  source: IObject<any>; // 配置项的数据
+  dataV: IDataV; // 配置项的数据
   children: SavedScenaData[];
 }
 export interface ScenaProps {
@@ -66,6 +67,8 @@ export interface ScenaProps {
   scenaAttrs?: IObject<any>;
   scenaText?: string;
   scneaHTML?: string;
+  config?: IObject<any>; // 配置项数据
+  source?: any[]; // 外部数据（接口/静态/sql等）
 }
 
 export type ScenaFunctionComponent<T> = ((

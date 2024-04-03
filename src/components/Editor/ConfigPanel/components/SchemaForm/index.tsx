@@ -24,7 +24,7 @@ const SchemaForm = (props: ISchemaFormProps) => {
       };
 
       return type === 'Group' ? (
-        <Form.Item key={id} label={label}>
+        <Form.Item key={id} {...itemProps}>
           {getFields(children)}
         </Form.Item>
       ) : (

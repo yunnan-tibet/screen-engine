@@ -3,6 +3,7 @@ import Editor from '../Editor';
 import { MENU_TYPE } from '../RightClickMenu/config';
 import { IDATAV } from '../types';
 import { prefix } from '../utils/utils';
+import { ElementInfo } from '../Viewport/Viewport';
 import CompConfig from './components/CompConfig';
 import GroupConfig from './components/GroupConfig';
 import MultConfig from './components/MultConfig';
@@ -17,6 +18,7 @@ export interface IConfigPanelRef {}
 
 const ConfigPanel = forwardRef<IConfigPanelRef, IProps>((props, ref) => {
   const { editor } = props;
+  const selectedTargets = editor.getSelectedTargets();
   const {
     state: {
       resources: { schema },
@@ -27,6 +29,7 @@ const ConfigPanel = forwardRef<IConfigPanelRef, IProps>((props, ref) => {
     const viewport = editor.getViewport();
     const selectedTargets = editor.getSelectedTargets();
     const len = selectedTargets.length;
+    let info: ElementInfo | undefined;
     let type;
     let config: IDATAV | undefined;
     if (!len) {
@@ -34,8 +37,9 @@ const ConfigPanel = forwardRef<IConfigPanelRef, IProps>((props, ref) => {
       type = MENU_TYPE.VIEWPORT;
     } else if (len === 1) {
       // 选中单个情况
-      const info = viewport.getInfoByElement(selectedTargets[0]);
-      if (!info.children || !info.children.length) {
+      info = viewport.getInfoByElement(selectedTargets[0]);
+
+      if (!info?.children || !info.children.length) {
         // 不是组
         type = MENU_TYPE.SINGLE_ELE;
         config = schema[info.name];
@@ -47,15 +51,15 @@ const ConfigPanel = forwardRef<IConfigPanelRef, IProps>((props, ref) => {
       // 选中多个的情况
       type = MENU_TYPE.MULT_ELE;
     }
-    return { type, config };
+    return { type, config, info };
   };
 
-  const { type, config } = getSelectedInfoAndType();
+  const { type, config, info } = getSelectedInfoAndType();
 
   const renderPanel = (_type: number) => {
     switch (_type) {
       case MENU_TYPE.SINGLE_ELE:
-        return <CompConfig editor={editor} configSchema={config} />;
+        return <CompConfig editor={editor} info={info} configSchema={config} />;
       case MENU_TYPE.VIEWPORT:
         return <PageConfig editor={editor} />;
       case MENU_TYPE.MULT_ELE:

@@ -620,16 +620,7 @@ export default class Editor extends React.PureComponent<
       resources: { source },
     } = this.state;
     const CompInner = source[name];
-    const Comp = makeScenaFunctionComponent(name, function (props: ScenaProps) {
-      return (
-        <div
-          style={{ display: 'inline-block' }}
-          data-scena-element-id={props.scenaElementId}
-        >
-          <CompInner />
-        </div>
-      );
-    });
+    const Comp = this.getScenaComponent(name, CompInner);
 
     return {
       attrs: {},
@@ -653,12 +644,28 @@ export default class Editor extends React.PureComponent<
     this.appendJSX(jsx);
   }
 
+  public getScenaComponent(name: string, Comp: any) {
+    return makeScenaFunctionComponent(name, function (props: ScenaProps) {
+      const { scenaElementId, config, source } = props;
+
+      return (
+        <div
+          style={{ display: 'inline-block' }}
+          data-scena-element-id={scenaElementId}
+        >
+          <Comp config={config} source={source} />
+        </div>
+      );
+    });
+  }
+
   // 这里只进行已有组件的复制粘贴等加载，暂不能进行重新进入的数据加载
   public loadSchemes(datas: SavedScenaData[]) {
     const viewport = this.getViewport();
     const {
       resources: { source },
     } = this.state;
+    const self = this;
     return this.appendJSXs(
       datas
         .map(function loadData(data): any {
@@ -674,20 +681,7 @@ export default class Editor extends React.PureComponent<
             if (componentId) {
               // 当前不存在元素，并且是组件的，去获取到存储的组件方法
               const CompInner = source[name];
-              const Component = makeScenaFunctionComponent(
-                name,
-                function (props: ScenaProps) {
-                  return (
-                    <div
-                      style={{ display: 'inline-block' }}
-                      data-scena-element-id={props.scenaElementId}
-                    >
-                      <CompInner />
-                    </div>
-                  );
-                },
-              );
-
+              const Component = self.getScenaComponent(name, CompInner);
               // 这里没有传入组件属性，只是进行了渲染？todo
               jsx = <Component />;
             } else {
@@ -1128,6 +1122,7 @@ export default class Editor extends React.PureComponent<
             tagName: target.tagName.toLowerCase(),
             // 获取所有样式属性
             frame: moveableData.getFrame(target).get(),
+            dataV: info.dataV,
             // 子级遍历
             children: info.children!.map(saveTarget),
           };

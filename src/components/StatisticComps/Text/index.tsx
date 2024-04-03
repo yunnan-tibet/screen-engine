@@ -41,6 +41,8 @@ const Text = ({ config, source }: CompConfig<ProgressProp>) => {
     hyperLink,
     boxShadow,
   } = config || {};
+  console.log(config, 'config');
+
   const { vertical, horizontal } = textAlign || {};
   const { bgColor, border, borderRadius } = bg || {};
   const { link, newWindow } = hyperLink || {};

@@ -32,6 +32,7 @@ export interface ElementInfo {
   jsx: ScenaJSXType;
   name: string;
   frame?: IObject<any>;
+  dataV: IDataV;
 
   scopeId?: string; // 父级id
   children?: ElementInfo[];
@@ -43,6 +44,11 @@ export interface ElementInfo {
   index?: number;
   innerText?: string;
   innerHTML?: string;
+}
+
+export interface IDataV {
+  config: IObject<any>;
+  source: any[];
 }
 export default class Viewport extends React.PureComponent<{
   style: IObject<any>;
@@ -57,6 +63,10 @@ export default class Viewport extends React.PureComponent<{
     name: 'Viewport',
     id: 'viewport',
     children: [],
+    dataV: {
+      config: {},
+      source: [],
+    },
   };
 
   public ids: IObject<ElementInfo> = {
@@ -101,6 +111,7 @@ export default class Viewport extends React.PureComponent<{
       const props: IObject<any> = {
         key: id,
       };
+
       if (isString(jsx)) {
         props[DATA_SCENA_ELEMENT_ID] = id;
         return React.createElement(
@@ -114,7 +125,6 @@ export default class Viewport extends React.PureComponent<{
         props.scenaAttrs = info.attrs || {};
         props.scenaText = info.innerText;
         props.scenaHTML = info.innerHTML;
-
         return React.createElement(jsx, props) as ScenaJSXElement;
       }
       if (isString(jsx.type)) {
@@ -124,7 +134,11 @@ export default class Viewport extends React.PureComponent<{
         props.scenaAttrs = info.attrs || {};
         props.scenaText = info.innerText;
         props.scenaHTML = info.innerHTML;
+        props.config = info.dataV.config;
+        props.source = info.dataV.source;
       }
+      console.log(props, 'propsprops');
+
       const jsxChildren = jsx.props.children;
       return React.cloneElement(
         jsx,
@@ -259,6 +273,10 @@ export default class Viewport extends React.PureComponent<{
       const elementInfo: ElementInfo = {
         ...info,
         jsx,
+        dataV: {
+          config: {},
+          source: [],
+        },
         children: this.registerChildren(children, id),
         scopeId,
         componentId,
@@ -270,6 +288,12 @@ export default class Viewport extends React.PureComponent<{
       this.setInfo(id, elementInfo);
       return elementInfo;
     });
+  }
+
+  public updateDataVConfigById(id: string, values: IObject<any>) {
+    const dataV = this.getInfo(id).dataV;
+    dataV.config = values;
+    this.forceUpdate();
   }
 
   // 加入新元素
@@ -459,7 +483,7 @@ export default class Viewport extends React.PureComponent<{
     return indexesList.map((indexes) => this.getInfoByIndexes(indexes));
   }
 
-  // 移动元素到前一个元素下作为子级，但是前一个元素应该是普通元素
+  // 暂不用。移动元素到前一个元素下作为子级，但是前一个元素应该是普通元素
   public moveInside(
     target: HTMLElement | SVGElement | string,
   ): Promise<MovedResult> {
@@ -490,7 +514,7 @@ export default class Viewport extends React.PureComponent<{
     return this.move(moved, prevInfo, lastInfo);
   }
 
-  //
+  // 暂不用
   public moveOutside(
     target: HTMLElement | SVGElement | string,
   ): Promise<MovedResult> {
@@ -508,7 +532,7 @@ export default class Viewport extends React.PureComponent<{
     return this.move(moved, rootInfo, parentInfo);
   }
 
-  // 位置移动，从一个父级移动到另一个父级下面
+  // 暂不用，位置移动，从一个父级移动到另一个父级下面
   public moves(
     nextInfos: Array<{
       info: ElementInfo;
@@ -566,7 +590,7 @@ export default class Viewport extends React.PureComponent<{
     });
   }
 
-  // 移动元素infos到父级
+  // 暂不用，移动元素infos到父级
   public move(
     infos: ElementInfo[],
     parentInfo: ElementInfo,
