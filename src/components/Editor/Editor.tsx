@@ -44,6 +44,7 @@ import CompPanel, { ICompPanelRef } from './CompPanel';
 import Header, { IHeaderRef } from './Header';
 import RightClickMenu, { IRightClickMenuRef } from './RightClickMenu';
 import { getResources } from './utils/statisticConfig';
+import Tabs from './Tabs/Tabs';
 
 function undoCreateElements(
   { infos, prevSelected }: IObject<any>,
@@ -125,7 +126,7 @@ export default class Editor extends React.PureComponent<
   // 事件管理
   public eventBus = new EventBus();
 
-  // map的存储工具,get,set,clear
+  // map的存储工具,get,set,clear，用于editor的全局存储
   public memory = new Memory();
 
   // 目前选中的元素，主要是对样式的更改渲染
@@ -159,7 +160,7 @@ export default class Editor extends React.PureComponent<
   public viewport = React.createRef<Viewport>();
 
   // 右侧tabs，暂不用，需要用配置panel替代
-  // public tabs = React.createRef<Tabs>();
+  public tabs = React.createRef<Tabs>();
 
   // 配置解析的表单panel
   public configPanel = React.createRef<IConfigPanelRef>();
@@ -184,7 +185,7 @@ export default class Editor extends React.PureComponent<
       moveableManager,
       viewport,
       menu,
-      // tabs,
+      tabs,
       rightClickMenu,
       header,
       compPanel,
@@ -404,7 +405,7 @@ export default class Editor extends React.PureComponent<
     memory.set('color', '#333');
     this.loadAtomComps();
     requestAnimationFrame(() => {
-      infiniteViewer.current!.scrollCenter();
+      infiniteViewer.current?.scrollCenter();
     });
     // 组件拖动到画布的操作
     const ele = infiniteViewer.current.getElement();
@@ -821,6 +822,7 @@ export default class Editor extends React.PureComponent<
         })
       );
     });
+    console.log(targets, 'setSelectedTargets');
 
     // 设置选中元素
     return this.promiseState({
@@ -1074,7 +1076,6 @@ export default class Editor extends React.PureComponent<
               jsx = React.createElement(data.tagName);
             }
           }
-          debugger;
           return {
             ...data,
             children: children.map(loadData),

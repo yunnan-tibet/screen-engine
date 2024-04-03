@@ -58,6 +58,7 @@ export interface SavedScenaData {
   innerText?: string;
   attrs: IObject<any>;
   frame: IObject<any>;
+  source: IObject<any>; // 配置项的数据
   children: SavedScenaData[];
 }
 export interface ScenaProps {
@@ -78,3 +79,15 @@ export type ScenaJSXElement =
   | ScenaFunctionJSXElement;
 export type ScenaFunctionJSXElement = React.ReactElement<any, ScenaComponent>;
 export type ScenaJSXType = ScenaJSXElement | string | ScenaComponent;
+export interface CompConfig<T> {
+  source?: any[];
+  config: T;
+}
+
+// datav配置文件格式
+export interface IDATAV {
+  name: string; // 组件key
+  desc: string; // 组件名称
+  version: string; // 组件版本
+  config: IObject<any>; // 配置项
+}

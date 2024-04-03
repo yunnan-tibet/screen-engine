@@ -5,12 +5,6 @@ import { getMaxZIdx, getMinZIdx } from '../utils/utils';
 
 const MAX_ZIDX = 9999;
 
-// 获取前一个zIdx
-function getPrevIdx(editor: Editor) {}
-
-// 获取下一个zIdx
-function getNextIdx() {}
-
 export const MENU_OPERATE = {
   UP: 1,
   DOWN: 2,
@@ -178,7 +172,7 @@ export const MENU_OPERATE = {
   },
 };
 
-// 菜单类型
+// 选中类型
 export const MENU_TYPE = {
   SINGLE_ELE: 1, // 单组件
   MULT_ELE: 2, // 多组件

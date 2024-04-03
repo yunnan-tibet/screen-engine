@@ -124,6 +124,7 @@ export default class MoveableManager extends React.PureComponent<{
     } = this.props;
 
     if (!selectedTargets.length) {
+      // 当没有选中元素的时候，渲染选中viewport，但是现在并不想选中viewport
       return this.renderViewportMoveable();
     }
     const { moveableData, keyManager, eventBus, selecto, memory } = editor;
@@ -246,7 +247,9 @@ export default class MoveableManager extends React.PureComponent<{
   public renderViewportMoveable() {
     const moveableData = this.moveableData;
     const viewport = this.editor.getViewport();
-    const target = viewport ? viewport.viewportRef.current! : null;
+    // const target = viewport ? viewport.viewportRef.current! : null;
+    // 不设置viewport可以选中
+    const target = null;
 
     return (
       <Moveable

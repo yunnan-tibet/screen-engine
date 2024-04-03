@@ -1,5 +1,6 @@
 {
-  "name": "Comp1",
+  "name": "atom-comp1",
   "desc": "饼图",
+  "version": "1.0.0",
   "img": "/assets/img/comp1.jpg"
 }
