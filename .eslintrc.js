@@ -32,6 +32,7 @@ module.exports = {
     'import/export': 0,
     'react/no-unknown-property': 0,
     'no-shadow': 0,
+    'react/prop-types': 0,
     'react/display-name': 0,
     'react/static-property-placement': 0,
     'react/state-in-constructor': 0,

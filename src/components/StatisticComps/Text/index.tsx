@@ -1,7 +1,7 @@
-import { CompConfig } from '@/components/Editor/types';
 import classnames from 'classnames';
-import React from 'react'
-import styles from './index.less'
+import React from 'react';
+import { CompConfig } from '@/components/Editor/types';
+import styles from './index.less';
 
 type ProgressProp = {
   text?: string;
@@ -25,11 +25,22 @@ type ProgressProp = {
     newWindow?: boolean;
   };
   boxShadow?: string;
-}
+};
 
-const Text = ({config, source}: CompConfig<ProgressProp>) => {
-  const { text, fontSize, color, fontWeight, textAlign, textDirection,
-  letterSpacing, bg, ellipsis, hyperLink, boxShadow } = config || {};
+const Text = ({ config, source }: CompConfig<ProgressProp>) => {
+  const {
+    text,
+    fontSize,
+    color,
+    fontWeight,
+    textAlign,
+    textDirection,
+    letterSpacing,
+    bg,
+    ellipsis,
+    hyperLink,
+    boxShadow,
+  } = config || {};
   const { vertical, horizontal } = textAlign || {};
   const { bgColor, border, borderRadius } = bg || {};
   const { link, newWindow } = hyperLink || {};
@@ -50,11 +61,15 @@ const Text = ({config, source}: CompConfig<ProgressProp>) => {
         borderRadius,
       }}
     >
-      {
-        link ? <a target={newWindow ? '_blank' : '_self'} href={link}>{text}</a> : text
-      }
+      {link ? (
+        <a target={newWindow ? '_blank' : '_self'} href={link} rel="noreferrer">
+          {text}
+        </a>
+      ) : (
+        text
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default React.memo(Text);

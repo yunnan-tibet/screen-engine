@@ -6,22 +6,22 @@
   "config": {
     "text": {
       "name": "文本内容",
-      "type": "input",
+      "type": "Input",
       "defaultValue": "我是标题"
     },
     "fontSize": {
       "name": "字号",
-      "type": "number",
+      "type": "Number",
       "defaultValue": 24
     },
     "color": {
       "name": "颜色",
-      "type": "color",
+      "type": "Color",
       "defaultValue": "#fff"
     },
     "fontWeight": {
       "name": "字体粗细",
-      "type": "select",
+      "type": "Select",
       "options": [
         {
           "label": "Normal",
@@ -80,11 +80,11 @@
     },
     "textAlign": {
       "name": "对齐方式",
-      "type": "group",
+      "type": "Group",
       "children": {
         "horizontal": {
           "name": "水平",
-          "type": "select",
+          "type": "Select",
           "options": [
             {
               "label": "左对齐",
@@ -103,7 +103,7 @@
         },
         "vertical": {
           "name": "垂直",
-          "type": "select",
+          "type": "Select",
           "options": [
             {
               "label": "顶部对齐",
@@ -124,7 +124,7 @@
     },
     "textDirection": {
       "name": "文字排列方式",
-      "type": "select",
+      "type": "Select",
       "options": [
         {
           "label": "水平",
@@ -139,30 +139,30 @@
     },
     "letterSpacing": {
       "name": "文字间隔",
-      "type": "number",
+      "type": "Number",
       "unit": "px"
     },
     "bg": {
       "name": "背景样式",
-      "type": "group",
+      "type": "Group",
       "children": {
         "bgColor": {
           "name": "背景色",
-          "type": "color"
+          "type": "Color"
         },
         "borderRadius": {
           "name": "圆角",
-          "type": "number"
+          "type": "Number"
         },
         "border": {
           "name": "边框",
-          "type": "input"
+          "type": "Input"
         }
       }
     },
     "ellipsis": {
       "name": "省略号",
-      "type": "switch"
+      "type": "Switch"
     },
     "hyperLink": {
       "name": "超链接配置",
@@ -170,7 +170,7 @@
       "children": {
         "link": {
           "name": "超链接",
-          "type": "Text"
+          "type": "Input"
         },
         "newWindow": {
           "name": "是否新开窗口",
@@ -181,7 +181,7 @@
     },
     "boxShadow": {
       "name": "文字阴影",
-      "type": "Text"
+      "type": "Input"
     }
   }
 }

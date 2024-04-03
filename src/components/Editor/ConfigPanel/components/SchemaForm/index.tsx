@@ -13,7 +13,6 @@ export interface ISchemaFormProps extends FormProps {
 
 const SchemaForm = (props: ISchemaFormProps) => {
   const { formItems, ...resProps } = props;
-
   const getFields = (items?: IFormItem[]) => {
     return items?.map((item) => {
       const { label, id, type, rules, initialValue, render, children } = item;
@@ -24,7 +23,7 @@ const SchemaForm = (props: ISchemaFormProps) => {
         rules,
       };
 
-      return type === 'group' ? (
+      return type === 'Group' ? (
         <Form.Item key={id} label={label}>
           {getFields(children)}
         </Form.Item>

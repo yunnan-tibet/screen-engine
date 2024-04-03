@@ -1,12 +1,13 @@
 import React from 'react';
 import {
-  Input,
-  Select,
-  Radio,
-  Checkbox,
-  DatePicker,
+  Input as Inp,
+  Select as Sele,
+  Radio as Rad,
+  Checkbox as Checkb,
+  DatePicker as DateP,
   InputNumber,
-  TreeSelect,
+  TreeSelect as TreeS,
+  Switch as Swit,
 } from 'antd';
 import Tree from 'antd/es/tree/Tree';
 // import ImageUploader from '../ImageUploader';
@@ -23,82 +24,79 @@ import {
   // IFormUploader,
   IFormTreeSelect,
   IFormRangePicker,
+  IFormColor,
+  IFormSwitch,
 } from './type';
+import MyColorPicker from './components/ColorPicker';
 
 export default function getItemComponent(type: IFormType) {
   // input 类型
-  const input = (item: IFormInput) => {
-    const { props = {} } = item;
+  const Input = (item: IFormInput) => {
+    const { props = {}, label } = item;
     return (
-      <Input
-        {...props}
-        placeholder={props.placeholder || `请输入${item.label}`}
-      />
+      <Inp {...props} placeholder={props.placeholder || `请输入${label}`} />
     );
   };
 
-  // inputNumber 类型
-  const inputNumber = (item: IFormInputNumber) => {
-    const { props = {} } = item;
+  // number 类型
+  const Number = (item: IFormInputNumber) => {
+    const { props = {}, label } = item;
     return (
       <InputNumber
         {...props}
-        placeholder={props.placeholder || `请输入${item.label}`}
+        placeholder={props.placeholder || `请输入${label}`}
       />
     );
   };
 
   // select 类型
-  const select = (item: IFormSelect) => {
-    const { options, props = {} } = item;
+  const Select = (item: IFormSelect) => {
+    const { options, props = {}, label } = item;
     return (
-      <Select
-        placeholder={props.placeholder || `请选择${item.label}`}
-        {...props}
-      >
+      <Sele placeholder={props.placeholder || `请选择${label}`} {...props}>
         {(options || []).map((option: ISelectOption) => {
           const { label, value } = option;
           return (
-            <Select.Option key={value} value={value}>
+            <Sele.Option key={value} value={value}>
               {label}
-            </Select.Option>
+            </Sele.Option>
           );
         })}
-      </Select>
+      </Sele>
     );
   };
 
   // radio类型
-  const radio = (item: IFormRadio) => {
+  const Radio = (item: IFormRadio) => {
     const { options, props = {} } = item;
-    return <Radio.Group options={options} {...props} />;
+    return <Rad.Group options={options} {...props} />;
   };
 
   // checkbox类型
-  const checkbox = (item: IFormCheckbox) => {
+  const Checkbox = (item: IFormCheckbox) => {
     const { options, props = {} } = item;
-    return <Checkbox.Group {...props} options={options} />;
+    return <Checkb.Group {...props} options={options} />;
   };
 
   // datepicker类型
-  const datePicker = (item: IFormDatePicker) => {
+  const DatePicker = (item: IFormDatePicker) => {
     const { props = {} } = item;
-    return <DatePicker {...props} />;
+    return <DateP {...props} />;
   };
 
   // rangepicker类型
-  const rangePicker = (item: IFormRangePicker) => {
+  const RangePicker = (item: IFormRangePicker) => {
     const { props = {} } = item;
-    return <DatePicker.RangePicker {...props} />;
+    return <DateP.RangePicker {...props} />;
   };
 
   // textArea类型
-  const textArea = (item: IFormTextArea) => {
-    const { props = {} } = item;
+  const TextArea = (item: IFormTextArea) => {
+    const { props = {}, label } = item;
     return (
-      <Input.TextArea
+      <Inp.TextArea
         {...props}
-        placeholder={props.placeholder || `请输入${item.label}`}
+        placeholder={props.placeholder || `请输入${label}`}
       />
     );
   };
@@ -109,31 +107,43 @@ export default function getItemComponent(type: IFormType) {
   // };
 
   // treeSelect类型
-  const treeSelect = (item: IFormTreeSelect) => {
-    const { props = {}, treeData } = item;
+  const TreeSelect = (item: IFormTreeSelect) => {
+    const { props = {}, treeData, label } = item;
     return (
-      <TreeSelect
-        placeholder={props.placeholder || `请输入${item.label}`}
+      <TreeS
+        placeholder={props.placeholder || `请输入${label}`}
         treeData={treeData}
         {...props}
       />
     );
   };
 
-  const group = () => {
+  const Group = () => {
     return <></>;
   };
+
+  const Color = (item: IFormColor) => {
+    const { props = {} } = item;
+    return <MyColorPicker {...props} />;
+  };
+  // switch类型
+  const Switch = (item: IFormSwitch) => {
+    const { props = {} } = item;
+    return <Swit {...props} />;
+  };
   return {
-    input,
-    select,
-    radio,
-    checkbox,
-    datePicker,
-    rangePicker,
-    textArea,
-    inputNumber,
+    Input,
+    Select,
+    Switch,
+    Radio,
+    Checkbox,
+    DatePicker,
+    RangePicker,
+    TextArea,
+    Number,
     // upload,
-    treeSelect,
-    group,
+    TreeSelect,
+    Color,
+    Group,
   }[type];
 }

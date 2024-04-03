@@ -4,7 +4,12 @@ import { RadioGroupProps } from 'antd/lib/radio';
 import { CheckboxGroupProps } from 'antd/lib/checkbox';
 import { DatePickerProps, RangePickerProps } from 'antd/lib/date-picker';
 import { Rule } from 'antd/lib/form';
-import { InputNumberProps, TreeProps, TreeSelectProps } from 'antd';
+import {
+  InputNumberProps,
+  SwitchProps,
+  TreeProps,
+  TreeSelectProps,
+} from 'antd';
 // import { IUploderProps } from '../ImageUploader';
 
 // 基础类型
@@ -17,20 +22,24 @@ export type IFormItem = IFormInput &
   IFormTextArea &
   // | IFormUploader
   IFormTreeSelect &
+  IFormSwitch &
+  IFormColor &
   IFormGroup;
 
 export type IFormType =
-  | 'input'
-  | 'inputNumber'
-  | 'select'
-  | 'radio'
-  | 'datePicker'
-  | 'rangePicker'
-  | 'checkbox'
-  | 'textArea'
+  | 'Input'
+  | 'Number'
+  | 'Select'
+  | 'Switch'
+  | 'Radio'
+  | 'DatePicker'
+  | 'RangePicker'
+  | 'Checkbox'
+  | 'TextArea'
   // | 'upload'
-  | 'treeSelect'
-  | 'group';
+  | 'TreeSelect'
+  | 'Color'
+  | 'Group';
 
 export interface IFormItemBase {
   // 输出属性key，id
@@ -66,6 +75,14 @@ export interface IFormTextArea extends IFormItemBase {
 // export interface IFormUploader extends IFormItemBase {
 //   props?: IUploderProps;
 // }
+
+export interface IFormSwitch extends IFormItemBase {
+  props?: SwitchProps;
+}
+
+export interface IFormColor extends IFormItemBase {
+  props?: any;
+}
 
 export interface IFormTreeSelect extends IFormItemBase {
   props?: TreeSelectProps;
