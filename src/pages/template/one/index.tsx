@@ -29,9 +29,8 @@ const TYPES = {
   },
 };
 
-const jsxs = JSON.parse(localStorage.getItem('jsonObj') || '{}');
+const jsxs = JSON.parse(localStorage.getItem('jsonObj') || '[]');
 export default function Page() {
-  console.log(jsxs, 'jsxs');
   const [type, setType] = useState(TYPES.CENTER);
   const [scaleNum, setScaleNum] = useState(1);
   // 源代码组件
